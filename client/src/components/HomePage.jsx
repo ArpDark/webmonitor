@@ -9,7 +9,7 @@ const HomePage=()=>{
     let navigate=useNavigate();
     useEffect(()=>{
         const verifyUser=async()=>{
-            const res=await fetch(backend_uri+"/auth",{
+            const res=await fetch(backend_uri+"/api/auth/authenticate",{
                 method:"GET",
                 credentials:"include"
             });

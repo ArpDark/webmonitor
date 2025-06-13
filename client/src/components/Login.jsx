@@ -11,7 +11,7 @@ const Login=({changeTab})=>{
         console.log(password);
         const backend_uri=import.meta.env.VITE_API_URI;
         
-        const res=await fetch(backend_uri+"/login",{
+        const res=await fetch(backend_uri+"/api/auth/login",{
             method:"POST",
             body:JSON.stringify({email:email,password:password}),
             headers:{"Content-Type":"application/json"},

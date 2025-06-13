@@ -13,7 +13,7 @@ const UrlPopup=()=>{
             website:userInput,
             interval:interval
         }
-        const res=await fetch(backendUri+"/addwebsite", {
+        const res=await fetch(backendUri+"/api/addwebsite", {
             method:"POST",
             body:JSON.stringify(dataToSend),
             headers:{"Content-Type":"application/json"},

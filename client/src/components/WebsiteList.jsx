@@ -5,7 +5,7 @@ const WebsiteList=()=>{
     const [websiteList,setWebsiteList]=useState([]);
     useEffect(()=>{
         const fetchUserData=(async()=>{
-            const res=await fetch(backend_uri+"/getwebsites",{
+            const res=await fetch(backend_uri+"/api/getwebsites",{
                 method:"GET",
                 credentials:"include",
             })

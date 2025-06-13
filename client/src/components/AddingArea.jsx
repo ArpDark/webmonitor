@@ -12,7 +12,7 @@ const AddingArea=()=>{
     }
 
     const handleLogout=async()=>{
-        const res=await fetch(backend_uri+"/logout",{
+        const res=await fetch(backend_uri+"/api/auth/logout",{
             method:"GET",
             credentials:"include"
         });
