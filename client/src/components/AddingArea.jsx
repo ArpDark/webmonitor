@@ -1,4 +1,4 @@
-import PlusIcon from "./PlusIcon";
+import PlusIcon from "./icons/PlusIcon";
 import { useState, useContext } from "react";
 import { PopupContext } from "./MyContext";
 import { useNavigate } from "react-router";

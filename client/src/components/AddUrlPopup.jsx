@@ -2,15 +2,17 @@ import { useState, useContext } from "react";
 import { PopupContext } from "./MyContext";
 import { RxCross1 } from "react-icons/rx";
 
-const UrlPopup=()=>{
+const AddUrlPopup=()=>{
     const {open,setOpen}=useContext(PopupContext);
-    const [userInput,setUserInput]=useState("");
+    const [urlInput,setUrlInput]=useState("");
+    const [nameInput,setNameInput]=useState("");
     const [interval,setInterval]=useState(5);
     const backendUri=import.meta.env.VITE_API_URI;
 
     const handleSubmit= async()=>{
         const dataToSend={
-            website:userInput,
+            name:nameInput,
+            website:urlInput,
             interval:interval
         }
         const res=await fetch(backendUri+"/api/addwebsite", {
@@ -20,7 +22,7 @@ const UrlPopup=()=>{
             credentials:"include"
         });
         console.log(interval);
-        console.log(userInput);
+        console.log(urlInput);
         const data=await res.json();
         console.log(res.status);
         console.log(data);
@@ -33,8 +35,12 @@ const UrlPopup=()=>{
         <div className={`flex justify-center items-center w-screen h-screen fixed  ${open? '' : 'hidden'} `}>
             <div className="flex border-2 border-gray-500 bg-white items-start justify-between pl-4 pr-1 pt-1 pb-2 w-1/4">
                 <form className="flex flex-col w-full" onSubmit={handleSubmit}>
+                    <label htmlFor="">Enter a Website Name<p className="text-xs">(max 15 characters)</p></label>
+                    <input type="text" maxLength="15" className=" border border-black " onChange={(event)=>{setNameInput(event.target.value)}}  required  />
+
                     <label htmlFor="">Enter the url</label>
-                    <input type="text" className=" border border-black " onChange={(event)=>{setUserInput(event.target.value)}}  required  />
+                    <input type="text" className=" border border-black " onChange={(event)=>{setUrlInput(event.target.value)}}  required  />
+
                     <label htmlFor="">Interval</label>
                     <select name="" id="" onChange={(event)=>{setInterval(event.target.value)}}>
                         <option value="5">5</option>
@@ -56,4 +62,4 @@ const UrlPopup=()=>{
     );
 }
 
-export default UrlPopup;
+export default AddUrlPopup;

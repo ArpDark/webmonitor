@@ -1,6 +1,6 @@
 import AddingArea from "./AddingArea";
 import WebsiteList from "./WebsiteList";
-import UrlPopup from "./UrlPopup";
+import AddUrlPopup from "./AddUrlPopup";
 import { PopupContext } from "./MyContext";
 import { useNavigate } from "react-router";
 import { useContext, useState, useEffect } from "react";
@@ -32,7 +32,7 @@ const HomePage=()=>{
             <h1 className="flex justify-center text-5xl pt-6 pb-12">Welcome Back! Aritra</h1>
             <PopupContext.Provider value={{open,setOpen}}>
                 <AddingArea/>
-                <UrlPopup/>
+                <AddUrlPopup/>
             </PopupContext.Provider>
             <WebsiteList/>
         </div>

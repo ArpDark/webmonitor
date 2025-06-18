@@ -8,6 +8,8 @@ import { verifyUser } from "./middlewares/auth.js";
 import authRoute from "./routes/auth.route.js";
 import addWebsiteRoute from "./routes/addwebsite.route.js";
 import getWebsiteRoute from "./routes/getwebsite.route.js";
+import deleteWebsiteRoute from "./routes/deletewebsite.route.js";
+import monitorWebsiteRoute from "./routes/monitor.route.js";
 
 const app=express();
 console.log(process.env.CORS_ORIGIN);
@@ -29,6 +31,8 @@ app.get("/",(req,res)=>{
 app.use("/api/auth", authRoute);
 app.use("/api", addWebsiteRoute);
 app.use("/api", getWebsiteRoute);
+app.use("/api", deleteWebsiteRoute);
+app.use("/api", monitorWebsiteRoute);
 
 
 export { app };

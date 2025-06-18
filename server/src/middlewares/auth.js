@@ -12,8 +12,10 @@ export const verifyUser=async(req,res)=>{
                 return {'status':401, 'data':err};
             }
             else{
+                // console.log(decoded.email);
+                
                 const response = await supabase.from('users').select('email').eq('email',decoded.email);
-                console.log(response.data.length);
+                // console.log(response.data.length);
                 if(response.data.length!=1)
                     return {'status':401, 'data':err};
                 else
