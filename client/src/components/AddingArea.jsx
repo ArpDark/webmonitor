@@ -1,10 +1,10 @@
 import PlusIcon from "./icons/PlusIcon";
 import { useState, useContext } from "react";
-import { PopupContext } from "./MyContext";
+import { UrlPopupContext } from "./MyContext";
 import { useNavigate } from "react-router";
 
 const AddingArea=()=>{
-    const {open,setOpen}=useContext(PopupContext);
+    const {open,setOpen}=useContext(UrlPopupContext);
     const backend_uri=import.meta.env.VITE_API_URI;
     const navigate=useNavigate();
     const handleClick=()=>{

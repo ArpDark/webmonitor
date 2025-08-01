@@ -1,2 +1,3 @@
 import { createContext } from "react";
-export const PopupContext=createContext(null);
+export const UrlPopupContext=createContext(null);
+export const SiteLogPopupContext=createContext(null);

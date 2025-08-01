@@ -1,6 +1,5 @@
 import { supabase } from "../db/dbConnect.js";
 import { verifyUser } from "../middlewares/auth.js";
-import { siteCheck } from "../services/siteCheck.js";
 
 export const addWebsite=async(req,res)=>{
     const websiteName=req.body.name;

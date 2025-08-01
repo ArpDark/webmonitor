@@ -1,4 +1,5 @@
-import { useState,useEffect } from "react";
+import { useState,useEffect, useContext } from "react";
+import { SiteLogPopupContext } from "./MyContext";
 import PlayIcon from "./icons/PlayIcon";
 import PauseIcon from "./icons/PauseIcon";
 import DeleteIcon from "./icons/DeleteIcon";
@@ -7,6 +8,7 @@ import DeleteIcon from "./icons/DeleteIcon";
 const WebsiteList=()=>{
     const backend_uri=import.meta.env.VITE_API_URI;
     const [websiteList,setWebsiteList]=useState([]);
+    const {openLog,setOpenLog}=useContext(SiteLogPopupContext);
     useEffect(()=>{
         const fetchUserData=(async()=>{
             const res=await fetch(backend_uri+"/api/getwebsites",{
@@ -20,21 +22,13 @@ const WebsiteList=()=>{
         fetchUserData();
         
     },[]);
-    // useEffect(()=>{
-    //     const eventSource=new EventSource(`${backend_uri}/api/sitedata`,{withCredentials:true});
-    //     eventSource.onmessage=(event)=>{
-    //         const data=JSON.parse(event.data);
-    //     }
-    //     return () => {
-    //         eventSource.close();
-    //     };
-    // },[]);
 
-    const changeDateFormat=(date)=>{
-        const newDate=new Date(date);
-        const str=newDate.toLocaleDateString()+" "+newDate.toLocaleTimeString().substring(0,8);
-        return str;
-    }
+
+    // const changeDateFormat=(date)=>{
+    //     const newDate=new Date(date);
+    //     const str=newDate.toLocaleDateString()+" "+newDate.toLocaleTimeString().substring(0,8);
+    //     return str;
+    // }
 
     const handleClick=async(website)=>{
         // console.log(website);
@@ -66,19 +60,20 @@ const WebsiteList=()=>{
             credentials:"include"
         });
         // const data=await res.json();
-        if(res.ok)
-        {
+        if(res.ok){
             const data=await res.json();
             setWebsiteList(data);
             console.log("data deleted successfully");
-            
         }
-        
+    }
+
+    const handlePopup=(site)=>{
+        setOpenLog(site.id);
     }
 
     return(
-        <div className="flex flex-col h-fit text-xl border-2 border-gray-500 rounded-md mx-4">
-            <div className=" flex justify-around border-2 border-red-200">
+        <div className="flex flex-col w-full overflow-x-auto h-fit text-xl border-2  border-gray-500 rounded-md mx-4">
+            <div className=" grid grid-cols-7 place-items-center border-2 border-red-200 min-w-[800px]">
                 <div>Website</div>
                 <div>Interval(in Mins)</div>
                 {/* <div>Last Checked</div> */}
@@ -88,9 +83,9 @@ const WebsiteList=()=>{
                 <div>Monitor</div>
             </div>
             {websiteList.map((website)=>(
-                <div key={website.website} className="flex justify-around border-2 border-red-200">
-                    <div>
-                        {website.website_name}
+                <div key={website.website} className="grid grid-cols-7 min-w-[800px] place-items-center border-2 border-red-200">
+                    <div className="flex flex-col border-2 border-green-400 overflow-x-scroll">
+                        <button className="flex" onClick={()=>{handlePopup(website)}}>{website.website_name}</button>
                         <a href={website.website} target="_blank" className=" flex text-blue-400 ">
                             (<p className="underline hover:no-underline">Link</p>)
                         </a>
@@ -103,10 +98,10 @@ const WebsiteList=()=>{
                     <div>{website.site_status?"Live":"Down" }</div>
                     
 
-                    <button className="bg-white border-2 border-black" onClick={()=>handleClick(website)}>
+                    <button className="w-fit h-fit bg-white border-2 border-black" onClick={()=>handleClick(website)}>
                         {website.being_monitored?<PauseIcon/>:<PlayIcon/>}
                     </button>
-                    <button  onClick={()=>handleDelete(website)}>
+                    <button  className=" w-fit h-fit border-2 border-green-400" onClick={()=>handleDelete(website)}>
                         <DeleteIcon/>
                     </button>
                 </div>

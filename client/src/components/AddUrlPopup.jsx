@@ -1,9 +1,9 @@
 import { useState, useContext } from "react";
-import { PopupContext } from "./MyContext";
+import { UrlPopupContext } from "./MyContext";
 import { RxCross1 } from "react-icons/rx";
 
 const AddUrlPopup=()=>{
-    const {open,setOpen}=useContext(PopupContext);
+    const {open,setOpen}=useContext(UrlPopupContext);
     const [urlInput,setUrlInput]=useState("");
     const [nameInput,setNameInput]=useState("");
     const [interval,setInterval]=useState(5);

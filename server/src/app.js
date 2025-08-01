@@ -4,12 +4,13 @@ import cookieParser from "cookie-parser";
 // import jwt from "jsonwebtoken";
 // import {supabase} from "./db/dbConnect.js";
 // import bcrypt from "bcryptjs";
-import { verifyUser } from "./middlewares/auth.js";
+// import { verifyUser } from "./middlewares/auth.js";
 import authRoute from "./routes/auth.route.js";
 import addWebsiteRoute from "./routes/addwebsite.route.js";
 import getWebsiteRoute from "./routes/getwebsite.route.js";
 import deleteWebsiteRoute from "./routes/deletewebsite.route.js";
 import monitorWebsiteRoute from "./routes/monitor.route.js";
+import siteLogsRoute from "./routes/sitelogs.route.js";
 
 const app=express();
 console.log(process.env.CORS_ORIGIN);
@@ -33,6 +34,7 @@ app.use("/api", addWebsiteRoute);
 app.use("/api", getWebsiteRoute);
 app.use("/api", deleteWebsiteRoute);
 app.use("/api", monitorWebsiteRoute);
+app.use("/api", siteLogsRoute);
 
 
 export { app };
